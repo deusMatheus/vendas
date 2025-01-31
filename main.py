@@ -2,6 +2,7 @@
 ------ Sistema de vendas 0.1 ------
 ------ Criar um sistema, utilizando DBs e funções para que através da interface seja possível adicionar e retirar itens. 
 ------ Criar um sistema de login e senha para funcionários
+------ Montar duas aplicações: uma para funcionários e outra para clientes.
 '''
 
 import streamlit as  st
@@ -9,7 +10,15 @@ import streamlit as  st
 st.header('Sistema de Vendas')
 
 def main():
+    
+    st.image('/home/matheus/Codes/Projetos Pessoais/db_editora_ex4.svg')
+
     refeicoes, aperitivos, bebidas = st.tabs(['Refeições', 'Aperitivos', 'Bebidas'])
+
+    nome = st.text_input('Nome')
+
+    if(nome):
+        st.write(f'Seu nome é {nome}')
 
     with refeicoes:
         col1, col2 = st.columns(2)
