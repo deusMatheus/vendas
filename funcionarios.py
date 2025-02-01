@@ -20,3 +20,10 @@ class Funcionarios:
 
     def __str__(self):
         return f'Username: {self.username}\nPassword: {self.password}\nName: {self.name}'
+
+    def add_employee(self, username, password, name):
+        cursor.execute(f"""
+            INSERT INTO funcionarios VALUES
+                        ({username}, {password}, {name})
+        """)
+        cursor.commit()

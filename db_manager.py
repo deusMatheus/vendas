@@ -1,5 +1,8 @@
 import sqlite3
 from pprint import pprint as pp
+from funcionarios import Funcionarios
+from produtos import Produtos
+from vendas import Vendas
 
 connection = sqlite3.connect('dados/database.db')
 cursor = connection.cursor()
@@ -27,22 +30,31 @@ def insertValues():
                    ('joao', '12345678', 'Joao', '0')
 """)
     connection.commit()
-
+'''
 def productExists(fetchConsult):
     if(fetchConsult):
         return True
     else:
         return False
-
+'''
 def sale():
     productName = input('Digite o nome do produto:')
-    consult = cursor.execute(f'SELECT ROWID, product_name, price FROM produtos WHERE product_name = "{productName}"')
-    fetchConsult = consult.fetchall()
-    if(productExists(fetchConsult)):
-        pp(f'Produtos disponíveis: {fetchConsult}')
-        productId = int(input('Digite o id do produto: '))
-        for product in fetchConsult:
-            if(productId == product[0]):
+#    consult = cursor.execute(f'SELECT ROWID, product_name, price FROM produtos WHERE product_name = "{productName}"')
+#    fetchConsult = consult.fetchall()
+    if(Produtos().product_exists(productName)):
+        pp(f'Produto encontrado!')
+        pp(f'Informações sobre "{productName}":')
+        productId = Produtos().get_product_id(productName)
+        productPrice = Produtos().get_product_price(productName)
+        pp(f'Id: {productId}')
+        pp(f'Preço: {productPrice}')
+        quantity = int(input('Informe a quantidade de produtos que serão vendidos: '))
+        totalValue = quantity * productPrice
+        pp(f'Valor total da venda: {totalValue}')
+        Vendas().add_sale(productId, quantity, totalValue)
+        pp('Venda realizada')
+'''        for product in Produtos().productID:
+            if(productId == product):
                 quantity = int(input('Digite a quantidade de produtos: '))
                 totalValue = quantity * product[2]
                 print(f'Valor total da venda: {totalValue}')
@@ -58,6 +70,7 @@ def sale():
                 print('Id não encontrado')
     else:
         print('Produto não encontrado')
+'''
 
 def main():
 #    createTables()

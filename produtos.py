@@ -11,7 +11,7 @@ class Produtos:
         self.productName = []
         self.price = []
         for item in self.consult:
-            self.productId.append(item[0])
+            self.productID.append(item[0])
             self.productName.append(item[1])
             self.price.append(item[2])
 
@@ -20,3 +20,18 @@ class Produtos:
     
     def product_exists(self, productName):
         return True if productName in self.productName else False
+    
+    def get_product_id(self, productName):
+        if(self.product_exists(productName)):
+            return self.productID[self.productName.index(productName)]
+
+    def get_product_price(self, productName):
+            if(self.product_exists(productName)):
+                return self.price[self.productName.index(productName)]
+            
+    def add_product(self, productName, productPrice):
+        cursor.execute(f"""
+            INSERT INTO produtos VALUES
+                        ({productName}, {productPrice})
+        """)
+        cursor.commit()
