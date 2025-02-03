@@ -1,12 +1,13 @@
 import sqlite3
+from db_manager import db_manager as db
 
-connection = sqlite3.connect('dados/database.db')
-cursor = connection.cursor()
+#connection = sqlite3.connect('dados/database.db')
+#cursor = connection.cursor()
 
 class Funcionarios:
 
     def __init__(self):
-        self.consult = cursor.execute('SELECT rowid, username, password, name FROM funcionarios').fetchall()
+        self.consult = db().cursor.execute('SELECT rowid, username, password, name FROM funcionarios').fetchall()
         self.funcID = []
         self.username = []
         self.password = []
@@ -21,9 +22,12 @@ class Funcionarios:
     def __str__(self):
         return f'Username: {self.username}\nPassword: {self.password}\nName: {self.name}'
 
+    def getName(self, username):
+        return db().cursor.execute(f'SELECT name FROM funcionarios WHERE username = "{username}"').fetchall()[0][0]
+
     def add_employee(self, username, password, name):
-        cursor.execute(f"""
+        db().cursor.execute(f"""
             INSERT INTO funcionarios VALUES
                         ({username}, {password}, {name})
         """)
-        cursor.commit()
+        db().cursor.commit()
