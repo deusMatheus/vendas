@@ -1,6 +1,7 @@
 from inferface import Interface
 from login_manager import Login_manager
 from funcionarios import Funcionarios
+from produtos import Produtos
 '''
 ------ Sistema de vendas 0.1 ------
 ------ Criar um sistema, utilizando DBs e funções para que através da interface seja possível adicionar e retirar itens. 
@@ -49,9 +50,36 @@ def main():
     if(not Login_manager().check(loginUsername, loginPassword)):
        print(Interface.userLogin(False))
     else:
+        running = True
         print(Interface.userLogin(True))
-        print(Interface.menu(Funcionarios().getName(loginUsername)))
-        inputMenu = Interface.inputMenu()
+        while(running):
+            print(Interface.menu(Funcionarios().getName(loginUsername)))
+            inputMenu = Interface.inputMenu()
+
+            if(inputMenu == '1'):
+                pass
+
+            elif(inputMenu == '2'):
+                print('Lista de produtos disponíveis:')
+                print(Produtos())
+                input('Aperte enter para continuar...')
+
+            elif(inputMenu == '*'):
+                running = False
+
+            elif(inputMenu == '3'):
+                print('Digite o nome do produto: ')
+                productName = Interface.inputMenu()
+                print('Digite o preço do produto: ')
+                productPrice = Interface.inputMenu()
+                try:
+                    Produtos().add_product(productName, productPrice)
+                    print('Cadastro concluído!')
+                except:
+                    print('Um erro ocorreu.')
+            
+            else:
+                print('Opção inválida')
 
 if __name__ == '__main__':
     main()

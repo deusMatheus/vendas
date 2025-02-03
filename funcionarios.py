@@ -28,6 +28,6 @@ class Funcionarios:
     def add_employee(self, username, password, name):
         db().cursor.execute(f"""
             INSERT INTO funcionarios VALUES
-                        ({username}, {password}, {name})
-        """)
-        db().cursor.commit()
+                        ("{username}", "{password}", "{name}", 0) 
+        """) # Futuramente, o 0 precisa sair
+        db().connection.commit()

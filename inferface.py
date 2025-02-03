@@ -25,7 +25,7 @@ class Interface:
         1 - Realizar venda
         2 - Listar produtos
         3 - Cadastrar produto
-        '''
+        * - Encerrar programa'''
         return f'{"*"*len(welcome_message)}\n{welcome_message}{full_message}\n{"*"*len(welcome_message)}'
 
     def inputMenu():

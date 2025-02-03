@@ -32,6 +32,6 @@ class Produtos:
     def add_product(self, productName, productPrice):
         cursor.execute(f"""
             INSERT INTO produtos VALUES
-                        ({productName}, {productPrice})
+                        ("{productName}", "{productPrice}")
         """)
-        cursor.commit()
+        connection.commit()
