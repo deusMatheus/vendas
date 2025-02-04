@@ -39,7 +39,7 @@ class db_manager:
             return True
         else:
             return False
-    '''
+    
     def sale():
         productName = input('Digite o nome do produto:')
     #    consult = cursor.execute(f'SELECT ROWID, product_name, price FROM produtos WHERE product_name = "{productName}"')
@@ -56,7 +56,7 @@ class db_manager:
             pp(f'Valor total da venda: {totalValue}')
             Vendas().add_sale(productId, quantity, totalValue)
             pp('Venda realizada')
-    '''        for product in Produtos().productID:
+            for product in Produtos().productID:
                 if(productId == product):
                     quantity = int(input('Digite a quantidade de produtos: '))
                     totalValue = quantity * product[2]

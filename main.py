@@ -2,6 +2,7 @@ from inferface import Interface
 from login_manager import Login_manager
 from funcionarios import Funcionarios
 from produtos import Produtos
+from vendas import Vendas
 '''
 ------ Sistema de vendas 0.1 ------
 ------ Criar um sistema, utilizando DBs e funções para que através da interface seja possível adicionar e retirar itens. 
@@ -57,7 +58,7 @@ def main():
             inputMenu = Interface.inputMenu()
 
             if(inputMenu == '1'):
-                pass
+                Vendas().sale()
 
             elif(inputMenu == '2'):
                 print('Lista de produtos disponíveis:')

@@ -29,6 +29,11 @@ class Produtos:
             if(self.product_exists(productName)):
                 return self.price[self.productName.index(productName)]
             
+    def get_product_name(self, productId):
+            tempProductName = self.productName[self.productID.index(productId)]
+            if(self.product_exists(tempProductName)):
+                return tempProductName
+            
     def add_product(self, productName, productPrice):
         cursor.execute(f"""
             INSERT INTO produtos VALUES
