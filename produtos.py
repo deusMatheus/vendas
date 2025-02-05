@@ -1,9 +1,5 @@
-#import sqlite3
 from db_manager import db_manager as db
 from categoria import Categoria
-
-#connection = sqlite3.connect('dados/database.db')
-#cursor = connection.cursor()
 
 class Produtos:
 
@@ -39,9 +35,3 @@ class Produtos:
     def add_product(self, productName, productPrice, productCategoryName):
         productCategoryID = Categoria().get_category_id(productCategoryName)
         db().insertValues('produtos', [f'("{productName}", {productPrice}, "{productCategoryID}")'])
-'''        cursor.execute(f"""
-            INSERT INTO produtos VALUES
-                        ("{productName}", "{productPrice}")
-        """)
-        connection.commit()
-'''

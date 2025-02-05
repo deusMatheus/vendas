@@ -1,8 +1,5 @@
-import sqlite3
 from db_manager import db_manager as db
 
-#connection = sqlite3.connect('dados/database.db')
-#cursor = connection.cursor()
 class Funcionarios:
 
     def __init__(self):
@@ -29,13 +26,6 @@ class Funcionarios:
 
     def add_employee(self, username, password, name, privilege):
         db().insertValues('funcionarios', [f'("{username}", "{password}", "{name}", "{privilege}")'])
-'''
-        db().cursor.execute(f"""
-            INSERT INTO funcionarios VALUES
-                        ("{username}", "{password}", "{name}", 0) 
-        """) # Futuramente, o 0 precisa sair
-        db().connection.commit()
-'''
 
 #Funcionarios().add_employee("adm", "adm", "adm", "adm")
 #Funcionarios().add_employee("math", "math", "math", "nenhum")

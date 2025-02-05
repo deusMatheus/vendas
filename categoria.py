@@ -1,8 +1,4 @@
 from db_manager import db_manager as db
-#import sqlite3
-
-#connection = sqlite3.connect('dados/database.db')
-#cursor = connection.cursor()
 
 class Categoria:
 

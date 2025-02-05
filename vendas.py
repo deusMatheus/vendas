@@ -1,10 +1,6 @@
-import sqlite3
 from db_manager import db_manager as db
 from produtos import Produtos 
 from pprint import pprint as pp
-
-#connection = sqlite3.connect('dados/database.db')
-#cursor = connection.cursor()
 
 class Vendas:
 
@@ -23,10 +19,6 @@ class Vendas:
 
     def add_sale(self, productID, quantity, totalValue, funcID, shoppingCart):
         db().insertValues('vendas', [f'({productID}, {quantity}, {totalValue}, {funcID}, "{shoppingCart}")'])
-#        cursor.execute(f"""
-#            INSERT INTO vendas VALUES
-#        """)
-#        connection.commit() 
 
     def sale(self, funcID):
         shoppingCart = []
@@ -39,12 +31,10 @@ class Vendas:
                 pp(f'Informações sobre "{productName}":')
                 productId = Produtos().get_product_id(productName)
                 productPrice = float(Produtos().get_product_price(productName))
-    #            pp(f'Id: {productId}')
                 pp(f'Preço: {productPrice}')
                 quantity = int(input('Informe a quantidade de produtos que serão vendidos: '))
                 totalValue = quantity * productPrice
                 saleValue += totalValue
-    #            pp(f'Valor total de {quantity} {productName}: {totalValue}')
                 shoppingCart.append((productId, quantity, totalValue))
                 confirma = input('Deseja adicionar outro produto no carrinho? (s/n) >>>> ')
                 shoppingCartIDs = ''
@@ -68,6 +58,3 @@ class Vendas:
                         pp('Venda realizada com sucesso!')
                     else:
                         pp('Venda cancelada!!!')
-
-#            Vendas().add_sale(productId, quantity, totalValue)
-#            pp('Venda realizada')
