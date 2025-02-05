@@ -25,6 +25,8 @@ class Interface:
         1 - Realizar venda
         2 - Listar produtos
         3 - Cadastrar produto
+        4 - Listar categorias
+        5 - Cadastrar categoria
         * - Encerrar programa'''
         return f'{"*"*len(welcome_message)}\n{welcome_message}{full_message}\n{"*"*len(welcome_message)}'
 

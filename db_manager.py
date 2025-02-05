@@ -1,8 +1,8 @@
 import sqlite3
 from pprint import pprint as pp
 #from funcionarios import Funcionarios
-from produtos import Produtos
-from vendas import Vendas
+#from produtos import Produtos
+#from vendas import Vendas
 
 class db_manager:
 
@@ -10,22 +10,34 @@ class db_manager:
         self.connection = sqlite3.connect('dados/database.db')
         self.cursor = self.connection.cursor()
 
-    def createTables (self):
-        self.cursor.execute('CREATE TABLE funcionarios (username, password, name, vendas_ids)')
-        self.cursor.execute('CREATE TABLE produtos (product_name, price)')
-        self.cursor.execute('CREATE TABLE vendas (produtos_id, product_quantity, final_price, id_funcionario)')
-
-    def insertValues(self):
-
-        self.cursor.execute("""
-        INSERT INTO produtos VALUES
-                    ('Sanduíche', 17.00),
-                    ('Refrigerante', 7.00),
-                    ('Aperitivo', 19.00),
-                    ('Refeição para daus pessoas', 36.00)
-    """)
+    def createTables (self, table_name, values_tuple):
+        self.cursor.execute(f'CREATE TABLE {table_name} {values_tuple}')
         self.connection.commit()
 
+    def insertValues(self, table_name, values_list):
+        for value_string in values_list:
+            self.cursor.execute(f"""INSERT INTO {table_name} VALUES {value_string}""")
+        self.connection.commit()
+
+    def deleteTables(self):
+        self.cursor.execute('DROP TABLE funcionarios')
+        self.cursor.execute('DROP TABLE produtos')
+        self.cursor.execute('DROP TABLE vendas')
+        self.cursor.execute('DROP TABLE categorias')
+        self.connection.commit()
+
+    def selectTables(self, columns_string, table_name):
+        return self.cursor.execute(f'SELECT {columns_string} FROM {table_name}').fetchall()
+    
+'''
+db_manager().deleteTables()
+db_manager().createTables('funcionarios','(username, password, name, privilégios)')
+db_manager().createTables('produtos','(product_name, price, id_categoria)')
+db_manager().createTables('categorias','(categoria)')
+db_manager().createTables('vendas','(produtos_id, product_quantity, final_price, id_funcionario, shopping_cart)')
+'''
+# -------------------------------
+'''
         self.cursor.execute("""
         INSERT INTO funcionarios VALUES
                     ('maria', '12345678', 'Maria', '0'),
@@ -33,7 +45,7 @@ class db_manager:
                     ('joao', '12345678', 'Joao', '0')
     """)
         self.connection.commit()
-    '''
+    
     def productExists(fetchConsult):
         if(fetchConsult):
             return True

@@ -1,12 +1,14 @@
-import sqlite3
+#import sqlite3
+from db_manager import db_manager as db
+from categoria import Categoria
 
-connection = sqlite3.connect('dados/database.db')
-cursor = connection.cursor()
+#connection = sqlite3.connect('dados/database.db')
+#cursor = connection.cursor()
 
 class Produtos:
 
     def __init__(self):
-        self.consult = cursor.execute('SELECT rowid, product_name, price FROM produtos').fetchall()
+        self.consult = db().selectTables('rowid, product_name, price', 'produtos')
         self.productID = []
         self.productName = []
         self.price = []
@@ -34,9 +36,12 @@ class Produtos:
             if(self.product_exists(tempProductName)):
                 return tempProductName
             
-    def add_product(self, productName, productPrice):
-        cursor.execute(f"""
+    def add_product(self, productName, productPrice, productCategoryName):
+        productCategoryID = Categoria().get_category_id(productCategoryName)
+        db().insertValues('produtos', [f'("{productName}", {productPrice}, "{productCategoryID}")'])
+'''        cursor.execute(f"""
             INSERT INTO produtos VALUES
                         ("{productName}", "{productPrice}")
         """)
         connection.commit()
+'''
