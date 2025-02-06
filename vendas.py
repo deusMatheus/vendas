@@ -1,6 +1,7 @@
 from db_manager import db_manager as db
 from produtos import Produtos 
 from pprint import pprint as pp
+import datetime
 
 class Vendas:
 
@@ -17,8 +18,8 @@ class Vendas:
             self.produtosQuantidade.append(item[2])
             self.precoFinal.append(item[3])
 
-    def add_sale(self, productID, quantity, totalValue, funcID, shoppingCart):
-        db().insertValues('vendas', [f'({productID}, {quantity}, {totalValue}, {funcID}, "{shoppingCart}")'])
+    def add_sale(self, productID, quantity, totalValue, funcID, shoppingCart, sale_date):
+        db().insertValues('vendas', [f'({productID}, {quantity}, {totalValue}, {funcID}, "{shoppingCart}", "{sale_date}")'])
 
     def sale(self, funcID):
         shoppingCart = []
@@ -53,8 +54,10 @@ class Vendas:
                     pp(f'Digite CANCELAR para cancelar a venda.')
                     confirmarCompra = input('>>>> ')
                     if(confirmarCompra == 'confirmar' or confirmarCompra == 'CONFIRMAR'):
+                        sale_datetime = datetime.datetime.now()
+                        formatted_sale_datetime = sale_datetime.strftime('%d/%m/%Y-%H:%M:%S')
                         for item in shoppingCart:
-                            self.add_sale(item[0],item[1],item[2], funcID, shoppingCartIDs)
+                            self.add_sale(item[0],item[1],item[2], funcID, shoppingCartIDs, formatted_sale_datetime)
                         pp('Venda realizada com sucesso!')
                     else:
                         pp('Venda cancelada!!!')

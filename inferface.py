@@ -2,8 +2,8 @@
 
 class Interface:
 
-    def loginScreen():
-        message = 'Sistema de Vendas 0.1'
+    def loginScreen(version):
+        message = f'Sistema de Vendas V{version}'
         return f'{"*"*len(message)}\n{message}\n{"*"*len(message)}'
     
     def askForLogin():
@@ -12,9 +12,9 @@ class Interface:
     def askforPassword():
         return input('Digite sua senha: ')
     
-    def userLogin(flag):
+    def userLogin(flag, name):
         if(flag):
-            return f'Logado!'
+            return f'Login realizado como {name}!'
         else:
             return f'Usuário ou senha incorretos!'
 
@@ -24,11 +24,14 @@ class Interface:
         Qual das opções abaixo deseja?
         1 - Realizar venda
         2 - Listar produtos
-        3 - Cadastrar produto
-        4 - Listar categorias
-        5 - Cadastrar categoria
+        3 - Listar categorias
+        4 - Listar vendas por funcionário
+        5 - Cadastrar produto
+        6 - Cadastrar categoria
+        7 - Cadastrar funcionário
+        0 - Logout
         * - Encerrar programa'''
-        return f'{"*"*len(welcome_message)}\n{welcome_message}{full_message}\n{"*"*len(welcome_message)}'
+        return f'{"*"*len(welcome_message)*2}\n{welcome_message}{full_message}\n{"*"*len(welcome_message)*2}'
 
     def inputMenu():
         return input('>>> ')

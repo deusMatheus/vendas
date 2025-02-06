@@ -23,9 +23,15 @@ class Funcionarios:
 
     def getName(self, username):
         return db().cursor.execute(f'SELECT name FROM funcionarios WHERE username = "{username}"').fetchall()[0][0]
+    
+    def getNameById(self, id):
+        return db().cursor.execute(f'SELECT name FROM funcionarios WHERE rowid = "{id}"').fetchall()[0][0]
 
-    def add_employee(self, username, password, name, privilege):
+    def add_employee(self, username, password, name, privilege='nenhum'):
         db().insertValues('funcionarios', [f'("{username}", "{password}", "{name}", "{privilege}")'])
+
+    def check_privileges(self, funcID):
+        return db().cursor.execute(f'SELECT privileges FROM funcionarios WHERE rowid = "{funcID}"').fetchall()[0][0]
 
 #Funcionarios().add_employee("adm", "adm", "adm", "adm")
 #Funcionarios().add_employee("math", "math", "math", "nenhum")

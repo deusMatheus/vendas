@@ -24,13 +24,32 @@ class db_manager:
 
     def selectTables(self, columns_string, table_name):
         return self.cursor.execute(f'SELECT {columns_string} FROM {table_name}').fetchall()
+
+    def listSales(self):
+        consult = self.cursor.execute(f'''
+                                   SELECT id_funcionario, SUM(final_price), date_time, shopping_cart
+                                   FROM vendas GROUP BY date_time
+                                   HAVING count(*) >= 1 ORDER BY date_time
+                                ''').fetchall()
+        return consult
+
+    def listProductQuantity(self):
+        consult = self.cursor.execute(f'''
+                                      SELECT group_concat(product_quantity)
+                                      FROM vendas GROUP BY shopping_cart
+                                      ''').fetchall()
+        return consult
     
-'''
+    def resetAll(self):
+        self.deleteTables()
+        self.createTables('funcionarios','(username, password, name, privileges)')
+        self.createTables('produtos','(product_name, price, id_categoria)')
+        self.createTables('categorias','(categoria)')
+        self.createTables('vendas','(produtos_id, product_quantity, final_price, id_funcionario, shopping_cart, date_time)')
+        self.insertValues('funcionarios', [f'("adm", "adm", "adm", "adm")'])
+    
 # -------------------------------
-db_manager().deleteTables()
-db_manager().createTables('funcionarios','(username, password, name, privilégios)')
-db_manager().createTables('produtos','(product_name, price, id_categoria)')
-db_manager().createTables('categorias','(categoria)')
-db_manager().createTables('vendas','(produtos_id, product_quantity, final_price, id_funcionario, shopping_cart)')
+# db_manager().resetAll()
 # -------------------------------
-'''
+
+#print(db_manager().listProductQuantityByProductId())
