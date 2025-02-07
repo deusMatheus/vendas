@@ -35,3 +35,7 @@ class Produtos:
     def add_product(self, productName, productPrice, productCategoryName):
         productCategoryID = Categoria().get_category_id(productCategoryName)
         db().insertValues('produtos', [f'("{productName}", {productPrice}, "{productCategoryID}")'])
+
+    def list_item_by_category(self, productCategory):
+        categoryID = Categoria().get_category_id(productCategory)
+        return db().cursor.execute(f'SELECT product_name, price FROM produtos WHERE id_categoria = "{categoryID}"').fetchall()

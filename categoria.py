@@ -11,7 +11,10 @@ class Categoria:
             self.categoriesName.append(item[1])
 
     def __str__(self):
-        return f'Id: {self.categoriesID}\categoryName: {self.categoriesName}\n'
+        return f'{self.categoriesName}'
+
+    def get_categories_list(self):
+        return self.categoriesName
 
     def category_exists(self, categoryName):
         return True if categoryName in self.categoriesName else False

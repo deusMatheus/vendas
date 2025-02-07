@@ -5,38 +5,75 @@ from produtos import Produtos
 from vendas import Vendas
 from categoria import Categoria
 from db_manager import db_manager as db
+import streamlit as st
 
 version = '0.3'
 
-'''
------- ######################################################
----------------- Sistema de Vendas V0.3 ----------------
------- Esta aplicação é um sistema de vendas, onde armazena as informações em banco de dados utilizando sqlite. 
------- Futuramente serão implementadas duas interfaces, uma para funcionários e outra para clientes.
------- Os clientes poderão visualizar os itens disponíveis como num cardápio digital, separados por categorias.
------- Inicialmente, a interface será através do terminal, mas posteriormente deve ser atualizada para utilizar o streamlit
------- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
------- Documentar melhor as funções do código, especialmente a função Vendas().sale(self, funcID)
------- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
------- ######################################################
----------------- Para V0.4 ----------------
------- Começar a trabalhar na interface com o Streamlit
------- ######################################################
----------------- Concluído V0.3 ----------------
------- Criar opção de logout e retornar para o menu de login.
------- Funcionários realizam somente vendas.
------- Funcionários com privilégios de ADM podem adicionar e excluir funcionários e produtos. Além disso, podem também listar as vendas e organizar por funcionários.
------- ######################################################
----------------- V0.2.1 ----------------
------- Criar um sistema, utilizando DBs e funções para que através da interface seja possível adicionar e retirar itens. 
------- Criar um sistema de login e senha para funcionários
------- A tabela Funcionários deve possuir uma coluna de privilégios. Administradores recebem o privilégio adm, e funcionários não possuem privilégios. 
------- A tabela Vendas deve possuir uma coluna id_funcionário que representa o funcionário que realizou a transação
------- A tabela Produtos deve possuir uma coluna categorias (bebidas, refeições, ...)
------- ######################################################
-'''
+#'''
+#------ ######################################################
+#---------------- Sistema de Vendas V0.3 ----------------
+#------ Esta aplicação é um sistema de vendas, onde armazena as informações em banco de dados utilizando sqlite. 
+#------ Futuramente serão implementadas duas interfaces, uma para funcionários e outra para clientes.
+#------ Os clientes poderão visualizar os itens disponíveis como num cardápio digital, separados por categorias.
+#------ Inicialmente, a interface será através do terminal, mas posteriormente deve ser atualizada para utilizar o streamlit
+#------ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#------ Documentar melhor as funções do código, especialmente a função Vendas().sale(self, funcID)
+#------ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#------ ######################################################
+#---------------- Para V0.4 ----------------
+#------ Começar a trabalhar na interface com o Streamlit
+#------ Ao invés de criar funções específicas através do arquivo Interface, criar páginas 
+#------ específicas para cada página.
+#------ ######################################################
+#---------------- Concluído V0.3 ----------------
+#------ Criar opção de logout e retornar para o menu de login.
+#------ Funcionários realizam somente vendas.
+#------ Funcionários com privilégios de ADM podem adicionar e excluir funcionários e produtos. Além disso, podem também listar as vendas e organizar por funcionários.
+#------ ######################################################
+#---------------- V0.2.1 ----------------
+#------ Criar um sistema, utilizando DBs e funções para que através da interface seja possível adicionar e retirar itens. 
+#------ Criar um sistema de login e senha para funcionários
+#------ A tabela Funcionários deve possuir uma coluna de privilégios. Administradores recebem o privilégio adm, e funcionários não possuem privilégios. 
+#------ A tabela Vendas deve possuir uma coluna id_funcionário que representa o funcionário que realizou a transação
+#------ A tabela Produtos deve possuir uma coluna categorias (bebidas, refeições, ...)
+#------ ######################################################
+#'''
 
 def main():
+    Interface.mainPage(version)
+
+    if 'login' not in st.session_state:
+        st.session_state['login'] = False
+
+    if 'funcName' not in st.session_state:
+        st.session_state['funcName'] = ''
+    
+    if 'privilege' not in st.session_state:
+        st.session_state['privilege'] = ''
+    
+    if (not st.session_state['login']):
+        button, st.session_state['privilege'], st.session_state['funcName'] = Interface.loginScreen(version)
+        if(button):
+            st.session_state['login'] = True
+
+    if(st.session_state['login']):
+#        st.Page(Interface.menuBar(version, st.session_state['funcName'], st.session_state['privilege']), title='Página principal')
+        if(st.session_state['privilege'] == 'adm'):
+            pages = [
+                st.Page('interface/menu_principal.py', title='Página principal'),
+                st.Page('interface/cadastrar_produto.py', title='Cadastrar Produtos')
+            ]
+
+        else:
+            pages = [
+                st.Page('interface/menu_principal.py', title='Página principal')
+            ]
+
+        pg = st.navigation(pages)
+        pg.run()
+#            Interface.tabs(funcName)
+
+def main2():
     loggedIn = False
     while(not loggedIn):
         print(Interface.loginScreen(version))

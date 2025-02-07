@@ -6,6 +6,9 @@ class db_manager:
         self.connection = sqlite3.connect('dados/database.db')
         self.cursor = self.connection.cursor()
 
+    def getColumnsTable(self, tableName):
+        return self.cursor.execute(f'PRAGMA table_info({tableName})')
+        
     def createTables (self, table_name, values_tuple):
         self.cursor.execute(f'CREATE TABLE {table_name} {values_tuple}')
         self.connection.commit()
@@ -51,5 +54,7 @@ class db_manager:
 # -------------------------------
 # db_manager().resetAll()
 # -------------------------------
+
+db_manager().getColumnsTable('funcionarios')
 
 #print(db_manager().listProductQuantityByProductId())
