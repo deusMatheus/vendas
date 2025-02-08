@@ -51,10 +51,18 @@ class db_manager:
         self.createTables('vendas','(produtos_id, product_quantity, final_price, id_funcionario, shopping_cart, date_time)')
         self.insertValues('funcionarios', [f'("adm", "adm", "adm", "adm")'])
     
+    def deleteValues(self,tableName, columnName, valueToDelete):
+        self.cursor.execute(f'DELETE FROM {tableName} WHERE {columnName}={valueToDelete};')
+        self.connection.commit()
+
 # -------------------------------
 # db_manager().resetAll()
 # -------------------------------
-
-db_manager().getColumnsTable('funcionarios')
-
 #print(db_manager().listProductQuantityByProductId())
+db_manager().deleteValues('categorias', 'categoria', '"bolo"')
+db_manager().deleteValues('categorias', 'categoria', '"lenda"')
+db_manager().deleteValues('categorias', 'categoria', '"123"')
+db_manager().deleteValues('categorias', 'categoria', '"Software"')
+db_manager().deleteValues('categorias', 'categoria', '"Petshop"')
+db_manager().deleteValues('categorias', 'categoria', '"Sexshop"')
+db_manager().deleteValues('categorias', 'categoria', '"Discos"')

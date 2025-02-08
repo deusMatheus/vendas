@@ -60,8 +60,10 @@ def main():
 #        st.Page(Interface.menuBar(version, st.session_state['funcName'], st.session_state['privilege']), title='Página principal')
         if(st.session_state['privilege'] == 'adm'):
             pages = [
-                st.Page('interface/menu_principal.py', title='Página principal'),
-                st.Page('interface/cadastrar_produto.py', title='Cadastrar Produtos')
+                st.Page('interface/menu_principal.py', title='Página principal - Cardápio'),
+                st.Page('interface/cadastrar_produto.py', title='Cadastrar Produtos'),
+                st.Page('interface/realizar_venda.py', title='Realizar Venda'),
+                st.Page('interface/cadastrar_categoria.py', title='Cadastrar Categorias')
             ]
 
         else:

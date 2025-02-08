@@ -8,7 +8,7 @@ def registerProduct(productName, productPrice, productCategory):
         Produtos().add_product(productName, productPrice, productCategory)
         st.write('Cadastro concluído!')
     except:
-        st.write('Um erro ocorreu.')
+        st.write('')
 
 with st.form('register_product'):
     categorias = Categoria().get_categories_list()
@@ -16,8 +16,8 @@ with st.form('register_product'):
     productPrice = st.text_input('Preço do produto')
     productCategory = st.selectbox(
         'Escolha a categoria',
-        categorias
+        categorias,
+        placeholder='Escolha uma opção',
     )
-    st.write(productCategory)
     st.form_submit_button(label='Cadastrar', on_click=registerProduct(productName, productPrice, productCategory))
 
