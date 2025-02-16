@@ -40,6 +40,8 @@ version = '0.3'
 #'''
 
 def main():
+#    st.set_page_config(layout='wide')
+
     Interface.mainPage(version)
 
     if 'login' not in st.session_state:
@@ -61,9 +63,9 @@ def main():
         if(st.session_state['privilege'] == 'adm'):
             pages = [
                 st.Page('interface/menu_principal.py', title='Página principal - Cardápio'),
-                st.Page('interface/cadastrar_produto.py', title='Cadastrar Produtos'),
                 st.Page('interface/realizar_venda.py', title='Realizar Venda'),
-                st.Page('interface/cadastrar_categoria.py', title='Cadastrar Categorias')
+                st.Page('interface/cadastrar_produto.py', title='Administrar Produtos'),
+                st.Page('interface/cadastrar_categoria.py', title='Administrar Categorias')
             ]
 
         else:

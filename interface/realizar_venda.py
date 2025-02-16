@@ -30,15 +30,16 @@ with st.form('register_sale'):
                 product_price.append(product[1])
                 product_name.append(f'{product[0]}')
 
-            for i in range(len(product_name)):
-                key_name = f'{product_name[i]}-{i}'
-                product_name[i] += f' - R${product_price[i]:.2f}'
-                st.write(product_name[i])
+            for k in range(len(product_name)):
+                key_name = f'{product_name[k]}-{k}'
+                product_name[k] += f' - R${product_price[k]:.2f}'
+                st.write(product_name[k])
+                st.write('Escolha a quantidade:')
                 st.number_input('',0,99,step=1, key=j)
                 j += 1
                 st.divider()
 
-            st.form_submit_button(f'Enviar {j}')
+            st.form_submit_button(f'Adicionar {categories_string_list[i]}(s)')
 
 #            column_name = st.columns(1)
 

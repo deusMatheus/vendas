@@ -11,13 +11,21 @@ def registerProduct(productName, productPrice, productCategory):
         st.write('')
 
 with st.form('register_product'):
-    categorias = Categoria().get_categories_list()
-    productName = st.text_input('Nome do produto')
-    productPrice = st.text_input('Preço do produto')
-    productCategory = st.selectbox(
-        'Escolha a categoria',
-        categorias,
-        placeholder='Escolha uma opção',
-    )
-    st.form_submit_button(label='Cadastrar', on_click=registerProduct(productName, productPrice, productCategory))
 
+    tabs = st.tabs(['Registrar', 'Excluir'])
+
+    with tabs[0]: # Registrar
+
+        categorias = Categoria().get_categories_list()
+        productName = st.text_input('Nome do produto')
+        productPrice = st.number_input('Preço do produto (R$)', value=0.00, step=1.00)
+    #    productPrice = st.text_input('Preço do produto', value='R$ 0,00')
+        productCategory = st.selectbox(
+            'Escolha a categoria',
+            categorias,
+            placeholder='Escolha uma opção',
+        )
+        st.form_submit_button(label='Cadastrar', on_click=registerProduct(productName, productPrice, productCategory))
+
+    with tabs[1]: # Excluir
+        pass
