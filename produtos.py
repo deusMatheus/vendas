@@ -47,6 +47,9 @@ class Produtos:
         productCategoryID = Categoria().get_category_id(productCategoryName)
         db().insertValues('produtos', [f'("{productName}", {productPrice}, "{productCategoryID}")'])
 
+    def delete_product(self, productName):
+        db().deleteValues('produtos', 'product_name', f"'{productName}'")
+
     def list_item_by_category(self, productCategory):
         categoryID = Categoria().get_category_id(productCategory)
-        return db().cursor.execute(f'SELECT product_name, price FROM produtos WHERE id_categoria = "{categoryID}"').fetchall()
+        return db().cursor.execute(f'SELECT product_name, price FROM produtos WHERE id_categoria = "{categoryID}";').fetchall()

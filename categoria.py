@@ -27,4 +27,4 @@ class Categoria:
         db().insertValues('categorias', [f'("{categoryName}")'])
 
     def delete_category(self, categoryName):
-        db().deleteValues('categorias', 'categoria', '""')
+        db().deleteValues('categorias', 'categoria', f'"{categoryName}"')

@@ -52,6 +52,9 @@ def main():
     
     if 'privilege' not in st.session_state:
         st.session_state['privilege'] = ''
+
+    if 'operation' not in st.session_state:
+        st.session_state['operation'] = False
     
     if (not st.session_state['login']):
         button, st.session_state['privilege'], st.session_state['funcName'] = Interface.loginScreen(version)
@@ -64,13 +67,16 @@ def main():
             pages = [
                 st.Page('interface/menu_principal.py', title='Página principal - Cardápio'),
                 st.Page('interface/realizar_venda.py', title='Realizar Venda'),
-                st.Page('interface/cadastrar_produto.py', title='Administrar Produtos'),
-                st.Page('interface/cadastrar_categoria.py', title='Administrar Categorias')
+                st.Page('interface/cadastrar_produto.py', title='Cadastrar Produtos'),
+                st.Page('interface/cadastrar_categoria.py', title='Cadastrar Categorias'),
+                st.Page('interface/excluir_produto.py', title='Excluir Produtos'),
+                st.Page('interface/excluir_categoria.py', title='Excluir Categorias')
             ]
 
         else:
             pages = [
-                st.Page('interface/menu_principal.py', title='Página principal')
+                st.Page('interface/menu_principal.py', title='Página principal'),
+                st.Page('interface/realizar_venda.py', title='Realizar Venda')
             ]
 
         pg = st.navigation(pages)
