@@ -8,11 +8,11 @@ from db_manager import db_manager as db
 from time import sleep
 import streamlit as st
 
-version = '0.4'
+version = '0.5'
 
 #'''
 #------ ######################################################
-#---------------- Sistema de Vendas V0.3 ----------------
+#---------------- Sistema de Vendas V0.5 ----------------
 #------ Esta aplicação é um sistema de vendas, onde armazena as informações em banco de dados utilizando sqlite. 
 #------ Futuramente serão implementadas duas interfaces, uma para funcionários e outra para clientes.
 #------ Os clientes poderão visualizar os itens disponíveis como num cardápio digital, separados por categorias.
@@ -21,7 +21,11 @@ version = '0.4'
 #------ Documentar melhor as funções do código, especialmente a função Vendas().sale(self, funcID)
 #------ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #------ ######################################################
-#---------------- Para V0.5 ----------------
+#---------------- Para V0.6 ----------------
+#------ Passar para o db os dados resgatados da página em realizar_venda.py
+#------ (WIP - 0.7) Pensar na segurança dos dados e como fazer o encapsulamento destas informações com classes, até mesmo nas interfaces do streamlit
+#------ ######################################################
+#---------------- Concluído V0.5 ----------------
 #------ Implementar o sistema de vendas adicionando os produtos no carrinho
 #------ ######################################################
 #---------------- Concluído V0.4 ----------------
