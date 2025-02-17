@@ -2,6 +2,8 @@ import streamlit as st
 from db_manager import db_manager as db
 from produtos import Produtos
 
+st.session_state['shopping_cart'] = []
+
 st.write(f'Usuário: {st.session_state['funcName']}')
 st.divider()
 categories = db().selectTables(('categoria'), 'categorias')

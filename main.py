@@ -5,9 +5,10 @@ from produtos import Produtos
 from vendas import Vendas
 from categoria import Categoria
 from db_manager import db_manager as db
+from time import sleep
 import streamlit as st
 
-version = '0.3'
+version = '0.4'
 
 #'''
 #------ ######################################################
@@ -20,7 +21,10 @@ version = '0.3'
 #------ Documentar melhor as funções do código, especialmente a função Vendas().sale(self, funcID)
 #------ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #------ ######################################################
-#---------------- Para V0.4 ----------------
+#---------------- Para V0.5 ----------------
+#------ Implementar o sistema de vendas adicionando os produtos no carrinho
+#------ ######################################################
+#---------------- Concluído V0.4 ----------------
 #------ Começar a trabalhar na interface com o Streamlit
 #------ Ao invés de criar funções específicas através do arquivo Interface, criar páginas 
 #------ específicas para cada página.
@@ -55,13 +59,21 @@ def main():
 
     if 'operation' not in st.session_state:
         st.session_state['operation'] = False
+
+    if 'shopping_cart' not in st.session_state:
+        st.session_state['shopping_cart'] = []
     
     if (not st.session_state['login']):
         button, st.session_state['privilege'], st.session_state['funcName'] = Interface.loginScreen(version)
         if(button):
+#            st.success('Logged in!')
+            st.toast("Logged in!")
+            sleep(1.5)
             st.session_state['login'] = True
 
     if(st.session_state['login']):
+#        st.toast("Logged in!")
+#        sleep(0.5)
 #        st.Page(Interface.menuBar(version, st.session_state['funcName'], st.session_state['privilege']), title='Página principal')
         if(st.session_state['privilege'] == 'adm'):
             pages = [
@@ -70,13 +82,15 @@ def main():
                 st.Page('interface/cadastrar_produto.py', title='Cadastrar Produtos'),
                 st.Page('interface/cadastrar_categoria.py', title='Cadastrar Categorias'),
                 st.Page('interface/excluir_produto.py', title='Excluir Produtos'),
-                st.Page('interface/excluir_categoria.py', title='Excluir Categorias')
+                st.Page('interface/excluir_categoria.py', title='Excluir Categorias'),
+#                st.Page('interface/logoff.py', title='Logoff')
             ]
 
         else:
             pages = [
                 st.Page('interface/menu_principal.py', title='Página principal'),
-                st.Page('interface/realizar_venda.py', title='Realizar Venda')
+                st.Page('interface/realizar_venda.py', title='Realizar Venda'),
+#                st.Page('interface/logoff.py', title='Logoff')
             ]
 
         pg = st.navigation(pages)

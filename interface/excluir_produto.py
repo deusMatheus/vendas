@@ -3,6 +3,8 @@ import streamlit as st
 from categoria import Categoria
 from produtos import Produtos
 
+st.session_state['shopping_cart'] = []
+
 def deleteProduct(productName):
     if(st.session_state['operation']):
         Produtos().delete_product(productName)

@@ -2,6 +2,8 @@ import streamlit as st
 from db_manager import db_manager as db
 from categoria import Categoria
 
+st.session_state['shopping_cart'] = []
+
 def registerCategory(categoryName):
     if(st.session_state['operation']):
         Categoria().add_category(categoryName.capitalize())

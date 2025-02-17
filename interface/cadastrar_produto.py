@@ -3,6 +3,8 @@ import streamlit as st
 from categoria import Categoria
 from produtos import Produtos
 
+st.session_state['shopping_cart'] = []
+
 def registerProduct(productName, productPrice, productCategory):
     if(productName != '' and st.session_state['operation']):
         try:

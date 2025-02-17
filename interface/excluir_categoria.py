@@ -1,6 +1,8 @@
 import streamlit as st
-from db_manager import db_manager as db
+#from db_manager import db_manager as db
 from categoria import Categoria
+
+st.session_state['shopping_cart'] = []
 
 def deleteCategory(categoryName):
     if(st.session_state['operation']):
