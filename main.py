@@ -8,7 +8,7 @@ from db_manager import db_manager as db
 from time import sleep
 import streamlit as st
 
-version = '0.5'
+version = '0.6'
 
 # Com este CSS é possível estilizar a página pegando as classes dos componentes. 
 #with open ('styles/styles.css') as file:
@@ -18,7 +18,7 @@ version = '0.5'
 
 #'''
 #------ ######################################################
-#---------------- Sistema de Vendas V0.5 ----------------
+#---------------- Sistema de Vendas V0.6 ----------------
 #------ Esta aplicação é um sistema de vendas, onde armazena as informações em banco de dados utilizando sqlite. 
 #------ Futuramente serão implementadas duas interfaces, uma para funcionários e outra para clientes.
 #------ Os clientes poderão visualizar os itens disponíveis como num cardápio digital, separados por categorias.
@@ -27,7 +27,11 @@ version = '0.5'
 #------ Documentar melhor as funções do código, especialmente a função Vendas().sale(self, funcID)
 #------ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #------ ######################################################
-#---------------- Para V0.6 ----------------
+#---------------- Para V0.7----------------
+#------ Correção de Bug (V 0.6.1): ao logar pela primeira vez, aparece um usuário vazio. Corrigir.
+#------ Atualizar documentação, comentar o código e arrumar o github deste projeto!
+#------ (WIP - 0.8) Pensar na segurança dos dados e como fazer o encapsulamento destas informações com classes, até mesmo nas interfaces do streamlit
+#---------------- Concluído V0.6 ----------------
 #------ Passar para o db os dados resgatados da página em realizar_venda.py
 #------ (WIP - 0.7) Pensar na segurança dos dados e como fazer o encapsulamento destas informações com classes, até mesmo nas interfaces do streamlit
 #------ ######################################################
