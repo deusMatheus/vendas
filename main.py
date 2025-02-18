@@ -10,6 +10,12 @@ import streamlit as st
 
 version = '0.5'
 
+# Com este CSS é possível estilizar a página pegando as classes dos componentes. 
+#with open ('styles/styles.css') as file:
+#    css = file.read()
+#
+#st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
+
 #'''
 #------ ######################################################
 #---------------- Sistema de Vendas V0.5 ----------------
@@ -76,6 +82,8 @@ def main():
             st.session_state['login'] = True
 
     if(st.session_state['login']):
+        st.write(f'Usuário: {st.session_state['funcName']}')
+        st.divider()
 #        st.toast("Logged in!")
 #        sleep(0.5)
 #        st.Page(Interface.menuBar(version, st.session_state['funcName'], st.session_state['privilege']), title='Página principal')
@@ -83,6 +91,7 @@ def main():
             pages = [
                 st.Page('interface/menu_principal.py', title='Página principal - Cardápio'),
                 st.Page('interface/realizar_venda.py', title='Realizar Venda'),
+                st.Page('interface/listar_vendas.py', title='Listar Vendas'),
                 st.Page('interface/cadastrar_produto.py', title='Cadastrar Produtos'),
                 st.Page('interface/cadastrar_categoria.py', title='Cadastrar Categorias'),
                 st.Page('interface/excluir_produto.py', title='Excluir Produtos'),
@@ -94,6 +103,7 @@ def main():
             pages = [
                 st.Page('interface/menu_principal.py', title='Página principal'),
                 st.Page('interface/realizar_venda.py', title='Realizar Venda'),
+                st.Page('interface/listar_vendas.py', title='Listar Vendas')
 #                st.Page('interface/logoff.py', title='Logoff')
             ]
 

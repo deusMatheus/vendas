@@ -39,7 +39,7 @@ class db_manager:
     def listProductQuantity(self):
         consult = self.cursor.execute(f'''
                                       SELECT group_concat(product_quantity)
-                                      FROM vendas GROUP BY shopping_cart
+                                      FROM vendas GROUP BY date_time
                                       ''').fetchall()
         return consult
     

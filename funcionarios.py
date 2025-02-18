@@ -33,5 +33,8 @@ class Funcionarios:
     def check_privileges(self, funcID):
         return db().cursor.execute(f'SELECT privileges FROM funcionarios WHERE rowid = "{funcID}"').fetchall()[0][0]
 
+    def list_funcionarios(self):
+        return self.name
+
 #Funcionarios().add_employee("adm", "adm", "adm", "adm")
 #Funcionarios().add_employee("math", "math", "math", "nenhum")

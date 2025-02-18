@@ -1,6 +1,7 @@
 from db_manager import db_manager as db
 from produtos import Produtos 
 from pprint import pprint as pp
+from funcionarios import Funcionarios
 import datetime
 
 class Vendas:
@@ -19,7 +20,39 @@ class Vendas:
             self.precoFinal.append(item[3])
 
     def add_sale(self, productID, quantity, totalValue, funcID, shoppingCart, sale_date):
-        db().insertValues('vendas', [f'({productID}, {quantity}, {totalValue}, {funcID}, "{shoppingCart}", "{sale_date}")'])
+        db().insertValues('vendas', [f'({int(productID)}, {int(quantity)}, {float(totalValue)}, {funcID}, "{shoppingCart}", "{sale_date}")'])
+
+    def list_sales(self):
+        sales_dict = {}
+        sales = db().listSales()
+        quantity = db().listProductQuantity()
+        base_list = []
+        shopping_list = []
+        for sale in sales:
+            base_list.append(sale[0:3]) # 0-> funcID; 1-> total_value; 2-> date_time
+            shopping_list.append(sale[3:]) # 3... -> shopping_cart
+
+        for i in range(len(base_list)):
+            func_name = Funcionarios().getNameById(base_list[i][0])
+            sale_date = base_list[i][2]
+            itens_list = shopping_list[i][0].split(',')
+            quantity_list = quantity[i][0].split(',')
+            itens_temp = []
+            for j in range(len(itens_list)):
+                itens_temp.append(f'{quantity_list[j]}x {Produtos().get_product_name(int(itens_list[j]))} - R${Produtos().get_product_price(Produtos().get_product_name(int(itens_list[j]))):.2f}')
+                sale_value = f'R${base_list[i][1]:.2f}'
+                sales_dict[sale_date] = [func_name]
+                sales_dict[sale_date].append(itens_temp)
+                sales_dict[sale_date].append(sale_value)
+#                print('\n-----')
+#                print(f'{func_name}')
+#                print(f'{sale_date}')
+#                print(f'{quantity_list[j]}x {Produtos().get_product_name(int(itens_list[j]))}')
+#                print(f'Preço unitário: R${Produtos().get_product_price(Produtos().get_product_name(int(itens_list[j]))):.2f}')
+#                print(f'Valor total da venda: R${base_list[i][1]:.2f}')
+#                print('-----')
+#        print(sales_dict)
+        return sales_dict
 
     def sale(self, funcID):
         shoppingCart = []
@@ -61,3 +94,4 @@ class Vendas:
                         pp('Venda realizada com sucesso!')
                     else:
                         pp('Venda cancelada!!!')
+

@@ -4,8 +4,7 @@ from produtos import Produtos
 
 st.session_state['shopping_cart'] = []
 
-st.write(f'Usuário: {st.session_state['funcName']}')
-st.divider()
+#st.write(f'Usuário: {st.session_state['funcName']}')
 categories = db().selectTables(('categoria'), 'categorias')
 categories_string_list = []
 for category in categories:

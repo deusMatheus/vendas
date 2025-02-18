@@ -1,8 +1,11 @@
 import streamlit as st
-#from vendas import Vendas
+import datetime
+from vendas import Vendas
+from funcionarios import Funcionarios
 from categoria import Categoria
 from produtos import Produtos
 from db_manager import db_manager as db
+from time import sleep
 
 if not st.session_state['shopping_cart']:
     shopping_cart = []
@@ -104,45 +107,18 @@ else:
             st.write(f'Preço total: R${final_price:.2f}')
             finish_sale = st.button('Concluir venda')
             if(finish_sale):
-
-#                '''
-#               PENSAR NA PROTEÇÃO
-#               Encapsulamento em Classes? Daria pra aplicar nas funções e variáveis do streamlit se usadas em conjunto?
-#
-#               productID = ??? FAZER Produtos().getFuncId(productNname) 
-#               quantity = ??? FAZER
-#               totalValue = ?final_price?
-#               funcID = ??? FAZER Funcionarios().getFuncId(name) ???
-#               sale_datetime = datetime.datetime.now()
-#               formatted_sale_datetime = sale_datetime.strftime('%d/%m/%Y-%H:%M:%S')
-#               for item in shoppingCart:
-#                   self.add_sale(productID,quantity,totalValue, funcID, shoppingCartIDs, formatted_sale_datetime)
-#                               
-#           '''
-
+                funcID = Funcionarios().get_func_id(st.session_state['funcName'])
+                shopping_cart = st.session_state['shopping_cart']
+                sale_datetime = datetime.datetime.now()
+                formatted_sale_datetime = sale_datetime.strftime('%d/%m/%Y-%H:%M:%S')
+                shoppingCartIDs = ', '.join([f"{Produtos().get_product_id(item[0][:-1])}" for item in shopping_cart])
+                for item in shopping_cart:
+                    productID_ = Produtos().get_product_id(item[0][:-1])
+                    Vendas().add_sale(productID_,item[1],float(item[2])*int(item[1]),funcID,shoppingCartIDs,formatted_sale_datetime)
                 st.success('Venda concluída com sucesso!!')
+                for i in range(5,0,-1):
+                    st.toast(f'Retornando ao menu principal em {i}')
+                    sleep(1)
                 st.session_state['shopping_cart'] = []
-
-    #            column_name = st.columns(1)
-    #           with column_name:
-    #            column_image, column_name = st.columns(2)
-    #            column_name, column_price = st.columns(2)
-    #            column_quantity,column_name, column_price = st.columns(3)
-    #            columns_dict = {"col_quan": column_quantity, "col_name": column_name, "col_price": column_price}
-    #            with column_quantity:
-    #                for i in range (len(product_name)):
-
-    #            with column_name:
-    #                for i in range (len(product_name)):
-    #                    st.write(product_name[i])
-    #                    st.number_input('',0,99,step=1, key=key_name[i])
-    #                    st.divider()
-
-    #                for product in product_name:
-    #                    st.write(product)
-
-    #            with column_price:
-    #                for price in product_price:
-    #                    st.write(f'R${price:.2f}')
-
+                st.switch_page('interface/menu_principal.py')
         

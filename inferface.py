@@ -13,6 +13,8 @@ class Interface:
 
     def mainPage(version):
         st.header(f'Sistema de Vendas {version}')
+        if('funcName' in st.session_state and not st.session_state['funcName']):
+            st.write(f'Usuário: {st.session_state['funcName']}')
 
     def loginScreen(version):
         privilege = 'nenhum'
