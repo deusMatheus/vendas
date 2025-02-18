@@ -1,1 +1,3 @@
-# Sistema para controle de vendas 0.1
+# Sistema para controle de vendas 0.6
+
+WIP
