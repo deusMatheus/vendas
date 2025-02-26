@@ -8,7 +8,8 @@ from db_manager import db_manager as db
 from time import sleep
 import streamlit as st
 
-version = '0.6'
+# version = '0.6'
+version = ''
 
 # Com este CSS é possível estilizar a página pegando as classes dos componentes. 
 #with open ('styles/styles.css') as file:
@@ -17,6 +18,10 @@ version = '0.6'
 #st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 #'''
+#------ ######################################################
+#---------------- BUGS V0.6 ----------------
+#------ Quando o  ADM vai em listar vendas, os funcionários aparecem um número de vezes igual ao array. Arrumar
+#------ Ao logar pela primeira vez, aparece um usuário vazio. Corrigir.
 #------ ######################################################
 #---------------- Sistema de Vendas V0.6 ----------------
 #------ Esta aplicação é um sistema de vendas, onde armazena as informações em banco de dados utilizando sqlite. 
@@ -28,9 +33,12 @@ version = '0.6'
 #------ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #------ ######################################################
 #---------------- Para V0.7----------------
-#------ Correção de Bug (V 0.6.1): ao logar pela primeira vez, aparece um usuário vazio. Corrigir.
+#------ Adicionar a remoção de itens da venda.
 #------ Atualizar documentação, comentar o código e arrumar o github deste projeto!
 #------ (WIP - 0.8) Pensar na segurança dos dados e como fazer o encapsulamento destas informações com classes, até mesmo nas interfaces do streamlit
+#---------------- Concluído V0.6.1 ----------------
+#------ Este bug estava ocorrendo devido à presença de um '-' no nome de um item -> Ao realizar uma venda, o(s) primeiro(s) item(s) adicionados ao carrinho bugam e mostra o erro too many values to unpack (expected 2). Olhar a linha 79 do realizar_venda.py
+#------ ######################################################
 #---------------- Concluído V0.6 ----------------
 #------ Passar para o db os dados resgatados da página em realizar_venda.py
 #------ (WIP - 0.7) Pensar na segurança dos dados e como fazer o encapsulamento destas informações com classes, até mesmo nas interfaces do streamlit

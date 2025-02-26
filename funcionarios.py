@@ -19,6 +19,9 @@ class Funcionarios:
         return f'Id: {self.funcID}\nUsername: {self.username}\nPassword: {self.password}\nName: {self.name}'
 
     def get_func_id(self, username):
+        return self.funcID[self.username.index(username)]
+
+    def get_func_id_by_name(self, username):
         return self.funcID[self.name.index(username)]
 
     def getName(self, username):
@@ -37,4 +40,6 @@ class Funcionarios:
         return self.name
 
 #Funcionarios().add_employee("adm", "adm", "adm", "adm")
-#Funcionarios().add_employee("math", "math", "math", "nenhum")
+Funcionarios().add_employee("joao", "joao", "João", "nenhum")
+Funcionarios().add_employee("maria", "maria", "Maria", "nenhum")
+Funcionarios().add_employee("pedro", "pedro", "Pedro", "nenhum")

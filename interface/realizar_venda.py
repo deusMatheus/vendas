@@ -107,7 +107,7 @@ else:
             st.write(f'Preço total: R${final_price:.2f}')
             finish_sale = st.button('Concluir venda')
             if(finish_sale):
-                funcID = Funcionarios().get_func_id(st.session_state['funcName'])
+                funcID = Funcionarios().get_func_id_by_name(st.session_state['funcName'])
                 shopping_cart = st.session_state['shopping_cart']
                 sale_datetime = datetime.datetime.now()
                 formatted_sale_datetime = sale_datetime.strftime('%d/%m/%Y-%H:%M:%S')

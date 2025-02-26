@@ -49,7 +49,7 @@ class db_manager:
         self.createTables('produtos','(product_name, price, id_categoria)')
         self.createTables('categorias','(categoria)')
         self.createTables('vendas','(produtos_id, product_quantity, final_price, id_funcionario, shopping_cart, date_time)')
-        self.insertValues('funcionarios', [f'("adm", "adm", "adm", "adm")'])
+        self.insertValues('funcionarios', [f'("adm", "adm", "Administrador", "adm")'])
     
     def deleteValues(self,tableName, columnName, valueToDelete):
         self.cursor.execute(f'DELETE FROM {tableName} WHERE {columnName}={valueToDelete};')

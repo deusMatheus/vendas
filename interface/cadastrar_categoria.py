@@ -17,7 +17,7 @@ with st.form('register_category'):
     categoryName = st.text_input('Nome da categoria que deseja...')
     db().deleteValues('categorias', 'categoria', '""')
 #    st.form_submit_button(label='CADASTRAR', on_click=registerCategory(categoryName))
-    button = st.form_submit_button(label='CADASTRAR')
+    button = st.form_submit_button(label='Cadastrar')
     if (button):
         st.session_state['operation'] = True
         registerCategory(categoryName)
