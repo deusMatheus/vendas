@@ -58,11 +58,3 @@ class db_manager:
 # -------------------------------
 # db_manager().resetAll()
 # -------------------------------
-#print(db_manager().listProductQuantityByProductId())
-#db_manager().deleteValues('categorias', 'categoria', '"bolo"')
-#db_manager().deleteValues('categorias', 'categoria', '"lenda"')
-#db_manager().deleteValues('categorias', 'categoria', '"123"')
-#db_manager().deleteValues('categorias', 'categoria', '"Software"')
-#db_manager().deleteValues('categorias', 'categoria', '"Petshop"')
-#db_manager().deleteValues('categorias', 'categoria', '"Sexshop"')
-#db_manager().deleteValues('categorias', 'categoria', '"Discos"')

@@ -17,6 +17,7 @@ funcionarios = Funcionarios().list_funcionarios()
 
 if (st.session_state['privilege'] == 'adm'):
     tabs = st.tabs(funcionarios)
+    print(funcionarios)
     for i in range(len(funcionarios)):
         with tabs[i]:
             for key, value in sales.items():

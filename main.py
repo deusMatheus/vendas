@@ -20,8 +20,6 @@ version = ''
 #'''
 #------ ######################################################
 #---------------- BUGS V0.6 ----------------
-#------ Quando o  ADM vai em listar vendas, os funcionários aparecem um número de vezes igual ao array. Arrumar
-#------ Ao logar pela primeira vez, aparece um usuário vazio. Corrigir.
 #------ ######################################################
 #---------------- Sistema de Vendas V0.6 ----------------
 #------ Esta aplicação é um sistema de vendas, onde armazena as informações em banco de dados utilizando sqlite. 
@@ -36,7 +34,9 @@ version = ''
 #------ Adicionar a remoção de itens da venda.
 #------ Atualizar documentação, comentar o código e arrumar o github deste projeto!
 #------ (WIP - 0.8) Pensar na segurança dos dados e como fazer o encapsulamento destas informações com classes, até mesmo nas interfaces do streamlit
-#---------------- Concluído V0.6.1 ----------------
+#---------------- Concluído V0.6.3 ----------------
+#------ Este bug estava ocorrendo pois as últimas linhas do módulo funcionarios.py não estava comentada -> Quando o  ADM vai em listar vendas, os funcionários aparecem um número de vezes igual ao array. Arrumar
+#------ A princípio, este bug estava ocorrendo pela chamada errada no módulo funcionários.py -> Ao logar pela primeira vez, aparece um usuário vazio. Corrigir.
 #------ Este bug estava ocorrendo devido à presença de um '-' no nome de um item -> Ao realizar uma venda, o(s) primeiro(s) item(s) adicionados ao carrinho bugam e mostra o erro too many values to unpack (expected 2). Olhar a linha 79 do realizar_venda.py
 #------ ######################################################
 #---------------- Concluído V0.6 ----------------

@@ -40,6 +40,6 @@ class Funcionarios:
         return self.name
 
 #Funcionarios().add_employee("adm", "adm", "adm", "adm")
-Funcionarios().add_employee("joao", "joao", "João", "nenhum")
-Funcionarios().add_employee("maria", "maria", "Maria", "nenhum")
-Funcionarios().add_employee("pedro", "pedro", "Pedro", "nenhum")
+#Funcionarios().add_employee("joao", "joao", "João", "nenhum")
+#Funcionarios().add_employee("maria", "maria", "Maria", "nenhum")
+#Funcionarios().add_employee("pedro", "pedro", "Pedro", "nenhum")
