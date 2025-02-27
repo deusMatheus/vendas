@@ -8,8 +8,8 @@ from db_manager import db_manager as db
 from time import sleep
 import streamlit as st
 
-# version = '0.6'
-version = ''
+version = '0.7'
+#version = ''
 
 # Com este CSS é possível estilizar a página pegando as classes dos componentes. 
 #with open ('styles/styles.css') as file:
