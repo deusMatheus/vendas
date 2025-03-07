@@ -23,6 +23,7 @@ class db_manager:
         self.cursor.execute('DROP TABLE produtos')
         self.cursor.execute('DROP TABLE vendas')
         self.cursor.execute('DROP TABLE categorias')
+        self.cursor.execute('DROP TABLE log')
         self.connection.commit()
 
     def selectTables(self, columns_string, table_name):
@@ -49,6 +50,7 @@ class db_manager:
         self.createTables('produtos','(product_name, price, id_categoria)')
         self.createTables('categorias','(categoria)')
         self.createTables('vendas','(produtos_id, product_quantity, final_price, id_funcionario, shopping_cart, date_time)')
+        self.createTables('log', '(date, time, table, worker_id, operation_description)')
         self.insertValues('funcionarios', [f'("adm", "adm", "Administrador", "adm")'])
     
     def deleteValues(self,tableName, columnName, valueToDelete):

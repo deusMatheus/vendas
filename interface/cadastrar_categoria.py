@@ -1,12 +1,15 @@
 import streamlit as st
 from db_manager import db_manager as db
 from categoria import Categoria
+from funcionarios import Funcionarios
+from log_manager import Log_manager as log
 
 st.session_state['shopping_cart'] = []
 
 def registerCategory(categoryName):
     if(st.session_state['operation']):
         Categoria().add_category(categoryName.capitalize())
+        log().create_log('Categoria', Funcionarios().get_func_id_by_name(st.session_state['funcName']), f'Criação da Categoria {categoryName}')
         st.session_state['operation'] = False
         st.toast('Categoria cadastrada com sucesso!')
         st.toast('Categoria cadastrada com sucesso!')

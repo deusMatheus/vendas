@@ -1,5 +1,6 @@
 import streamlit as st
 import datetime
+from log_manager import Log_manager as log
 from vendas import Vendas
 from funcionarios import Funcionarios
 from categoria import Categoria
@@ -115,6 +116,7 @@ else:
                     productID_ = Produtos().get_product_id(item[0][:-1])
                     Vendas().add_sale(productID_,item[1],float(item[2])*int(item[1]),funcID,shoppingCartIDs,formatted_sale_datetime)
                 st.success('Venda concluída com sucesso!!')
+                log().create_log('Vendas', funcID, f'Venda realizada no valor de R${final_price:.2f} por {Funcionarios().getNameById(funcID)}')
                 for i in range(3,0,-1):
                     st.toast(f'Retornando ao menu principal em {i}')
                     sleep(1)

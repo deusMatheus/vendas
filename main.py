@@ -6,9 +6,10 @@ from vendas import Vendas
 from categoria import Categoria
 from db_manager import db_manager as db
 from time import sleep
+from log_manager import Log_manager as log
 import streamlit as st
 
-version = '0.7'
+version = '0.8'
 #version = ''
 
 # Com este CSS é possível estilizar a página pegando as classes dos componentes. 
@@ -19,9 +20,9 @@ version = '0.7'
 
 #'''
 #------ ######################################################
-#---------------- BUGS V0.6 ----------------
+#---------------- BUGS V0.8 ----------------
 #------ ######################################################
-#---------------- Sistema de Vendas V0.6 ----------------
+#---------------- Sistema de Vendas V0.8 ----------------
 #------ Esta aplicação é um sistema de vendas, onde armazena as informações em banco de dados utilizando sqlite. 
 #------ Futuramente serão implementadas duas interfaces, uma para funcionários e outra para clientes.
 #------ Os clientes poderão visualizar os itens disponíveis como num cardápio digital, separados por categorias.
@@ -30,10 +31,20 @@ version = '0.7'
 #------ Documentar melhor as funções do código, especialmente a função Vendas().sale(self, funcID)
 #------ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #------ ######################################################
-#---------------- Para V0.7----------------
-#------ Adicionar a remoção de itens da venda.
+#---------------- Para V0.X----------------
 #------ Atualizar documentação, comentar o código e arrumar o github deste projeto!
-#------ (WIP - 0.8) Pensar na segurança dos dados e como fazer o encapsulamento destas informações com classes, até mesmo nas interfaces do streamlit
+#------ Pensar na segurança dos dados e como fazer o encapsulamento destas informações com classes, até mesmo nas interfaces do streamlit
+#------ Pensar em maneiras de criptografar as senhas e dados dos usuários
+#------ ######################################################
+#---------------- Para V0.9 ----------------
+#------ Implementar sistema de cadastro de funcionários por e-mail, gerando token de acesso temporário.
+#------ ######################################################
+#---------------- Concluído V0.8 ----------------
+#------ Criação da tabela de log, onde cadastros, exclusões, vendas e logins são registrados no db.
+#------ ######################################################
+#---------------- Concluído V0.7 ----------------
+#------ Adicionar a remoção de itens da venda.
+#------ ######################################################
 #---------------- Concluído V0.6.3 ----------------
 #------ Este bug estava ocorrendo pois as últimas linhas do módulo funcionarios.py não estava comentada -> Quando o  ADM vai em listar vendas, os funcionários aparecem um número de vezes igual ao array. Arrumar
 #------ A princípio, este bug estava ocorrendo pela chamada errada no módulo funcionários.py -> Ao logar pela primeira vez, aparece um usuário vazio. Corrigir.
@@ -90,6 +101,7 @@ def main():
         if(button):
 #            st.success('Logged in!')
             st.toast("Logged in!")
+            log().create_log('Funcionarios', Funcionarios().get_func_id_by_name(st.session_state['funcName']), f'Usuário {st.session_state['funcName']} realizou login')
             sleep(1.5)
             st.session_state['login'] = True
 

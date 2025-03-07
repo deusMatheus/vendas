@@ -2,6 +2,8 @@ import streamlit as st
 #from inferface import Interface
 from categoria import Categoria
 from produtos import Produtos
+from funcionarios import Funcionarios
+from log_manager import Log_manager as log
 
 st.session_state['shopping_cart'] = []
 
@@ -9,6 +11,7 @@ def registerProduct(productName, productPrice, productCategory):
     if(productName != '' and st.session_state['operation']):
         try:
             Produtos().add_product(productName.capitalize(), productPrice, productCategory)
+            log().create_log('Produtos', Funcionarios().get_func_id_by_name(st.session_state['funcName']), f'Cadastro do Produto {productName}')
             st.write('Cadastro concluído!')
             st.toast('Produto cadastrado com sucesso!')
             st.toast('Produto cadastrado com sucesso!')
